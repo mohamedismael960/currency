@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,8 @@ export class CurrencyExchangerComponent implements OnInit , OnDestroy , OnChange
 
   @Input() from!:string;
   @Input() to!:string;
+
+  @Output() to_Changes = new EventEmitter();
   constructor(private fb:FormBuilder,
     private currencyExchangerService:CurrencyExchangerService,
     private mostCuurenciesService:MostCuurenciesService,
@@ -40,9 +42,13 @@ export class CurrencyExchangerComponent implements OnInit , OnDestroy , OnChange
   intiForm(){
     this.form = this.fb.group({
       amount:['1',Validators.required],
-      from:[{value:this.from, disabled:this.from ? true : false},Validators.required],
-      to:[this.to,Validators.required],
+      from:[{value:(this.from ? this.from : 'EUR'), disabled:this.from ? true : false},Validators.required],
+      to:[(this.to ? this.to : 'USD'),Validators.required],
     });
+    const sub:any = this.form.get('to')?.valueChanges.subscribe(x => {
+      this.to_Changes.next(x);
+    })
+    this.unsubscribe.push(sub);
   }
   get f() {
     return this.form.controls;

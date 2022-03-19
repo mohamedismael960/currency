@@ -27,4 +27,8 @@ export class DetailsComponent implements OnInit {
       this.to = param.params.to;
     })
   }
+
+  to_Changes(event:string){
+    this.to = event;
+  }
 }

@@ -5,6 +5,7 @@ import { DetailsRoutingModule } from './details-routing.module';
 import { DetailsComponent } from './details.component';
 import { CurrencyExchangerModule } from '../currencyExchanger-module/currency-exchanger.module';
 import { ChartsComponent } from './components/charts/charts.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ChartsComponent } from './components/charts/charts.component';
   imports: [
     CommonModule,
     DetailsRoutingModule,
-    CurrencyExchangerModule
+    CurrencyExchangerModule,
+    NgChartsModule
   ]
 })
 export class DetailsModule { }
