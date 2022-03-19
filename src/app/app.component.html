@@ -4,9 +4,13 @@
             <img width="50px" height="50x" src="../assets/images/logo.jpg" alt="">
         </a>
         <div class="d-flex">
-          <button routerLink="/details" class="btn btn-outline-primary mx-3">EUR-USD Details</button>
-          <button class="btn btn-outline-primary">EUR-GBP Details</button>
+          <button routerLink="/details" [queryParams]="{from: 'EUR', to: 'USD'}" class="btn btn-outline-primary mx-3">EUR-USD Details</button>
+          <button routerLink="/details" [queryParams]="{from: 'EUR', to: 'GBP'}" class="btn btn-outline-primary">EUR-GBP Details</button>
         </div>
     </div>
 </nav>
 <router-outlet></router-outlet>
+<!-- 
+<div style="height: 1000px;">
+
+</div> -->

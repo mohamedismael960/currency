@@ -1,6 +1,7 @@
 <form [formGroup]="form" class="form">
     <div class="row">
         <div class="col-md-5 col-12 mb-3">
+            <div class="mb-1">Amount</div>
             <input 
               type="number" 
               class="form-control"
@@ -12,31 +13,31 @@
          <div class="col-md-7 col-12 ml-auto">
             <div class="row text-center">
                 <div class="col">
+                    <div class="mb-1" style="text-align: left;">From</div>
                     <select formControlName="from" class="form-select form-select-sm w-100" aria-label=".form-select-sm example" >
-                        <option selected>Select Currency</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <ng-container *ngFor="let cur of currencies | keyvalue">
+                            <option [value]="cur.key">{{cur.key}}</option>
+                        </ng-container>
                       </select>
                 </div>
-                <div class="col-2 switch">
-                    <img style="cursor: pointer;" width="25px" src="/assets/icons/switch.svg" alt="">
+                <div class="col-2 switch align-self-end mb-2">
+                    <img (click)="swap()" style="cursor: pointer;" width="25px" src="/assets/icons/switch.svg" alt="">
                 </div>
                 <div class="col">
+                    <div class="mb-1" style="text-align: left;">To</div>
                     <select formControlName="to" class="form-select form-select-sm w-100" aria-label=".form-select-sm example">
-                        <option selected>Select Currency</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <ng-container *ngFor="let cur of currencies | keyvalue">
+                            <option [value]="cur.key">{{cur.key}}</option>
+                        </ng-container>
                       </select>
                 </div>
                 <div class="col-12 mt-3">
-                    <button [disabled]="form.invalid" type="button" class="btn btn-primary btn-sm w-100">Convert</button>
+                    <button [disabled]="form.invalid" type="button" class="btn btn-primary btn-sm w-100" (click)="convert()">Convert</button>
                 </div>
             </div>
          </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 align-items-center">
         <div class="col-md-5 col-12">
             <input 
               type="number" 
@@ -46,8 +47,18 @@
               [disabled]="true"
           >
         </div>
-        <div class="col-md-7 col-12">
-            
+        <div class="col">
+            <input 
+            type="number" 
+            class="form-control"
+            class="text-center w-100"
+            [placeholder]="'XX XXX USD'"
+            [disabled]="true"
+            style="height: 60px;"
+        >
+        </div>
+        <div class="col-3" *ngIf="!router.url.includes('details')">
+            <button routerLink="/details" [queryParams]="{from: f.from.value, to: f.to.value}"  [disabled]="form.invalid" type="button" class="btn btn-primary btn-sm w-100">More Details</button>
         </div>
     </div>
   </form>

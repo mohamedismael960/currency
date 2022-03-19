@@ -1,1 +1,9 @@
-<p>most-currencies works!</p>
+<div class="row mostCurrencies" *ngIf="mostCurrencies$ | async as cuurencyObj">
+    <div class="col-md-4 col-12" *ngFor="let item of (cuurencyObj.reverse().slice(0,9));">
+        <div class="myCard">
+            <div> Ammount :  {{item.amount}}</div>
+            <div>From :  {{item.from}}</div>
+            <div>To :  {{item.to}}</div>
+        </div>
+    </div>
+</div>

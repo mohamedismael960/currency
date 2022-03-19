@@ -1,3 +1,14 @@
-<div style="position: sticky;top: 200px;">
-    <p>details works!</p>
+<div class="detailsPage">
+    <div class="buttonBack">
+        <button routerLink="/"  type="button" class="btn btn-primary btn-sm">Back To Home</button>
+    </div>
+    <div class="head" *ngIf="allCurrencies$ | async as allCuurency">
+        {{from}} - {{allCuurency[from]}}
+    </div>
+    <div class="currency">
+        <app-currency-exchanger [from]="from" [to]="to"></app-currency-exchanger>
+    </div>
+</div>
+<div class="charts">
+    <app-charts [from]="from" [to]="to"></app-charts>
 </div>

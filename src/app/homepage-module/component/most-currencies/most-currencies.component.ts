@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { cuurencyInterface } from 'src/app/currencyExchanger-module/models/currencyExchanger.module';
+import { MostCuurenciesService } from './services/most-cuurencies.service';
 
 @Component({
   selector: 'app-most-currencies',
@@ -6,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./most-currencies.component.scss']
 })
 export class MostCurrenciesComponent implements OnInit {
-
-  constructor() { }
+  mostCurrencies$!:Observable<cuurencyInterface[]>;
+  constructor(private mostCuurenciesService:MostCuurenciesService) { 
+    this.mostCurrencies$ = this.mostCuurenciesService.mostCurrencies$
+  }
 
   ngOnInit(): void {
+
   }
 
 }
