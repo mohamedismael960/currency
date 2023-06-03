@@ -10,6 +10,13 @@ export class convertData{
     }
 }
 
+export interface convertResponse {
+    date : string , 
+    query: convertData,
+    result: number,
+    success: boolean
+}
+
 export interface cuurencyInterface{
     from:string;
     to:string;

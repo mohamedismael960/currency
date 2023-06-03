@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { MostCuurenciesService } from '../homepage-module/component/most-currencies/services/most-cuurencies.service';
-import { convertData } from './models/currencyExchanger.module';
+import { convertData, convertResponse } from './models/currencyExchanger.module';
 import { CurrencyExchangerService } from './services/currency-exchanger.service';
 
 @Component({
@@ -21,6 +21,11 @@ export class CurrencyExchangerComponent implements OnInit , OnDestroy , OnChange
   @Input() to!:string;
 
   @Output() to_Changes = new EventEmitter();
+
+
+  fromText!:string;
+  toText!:string;
+
   constructor(private fb:FormBuilder,
     private currencyExchangerService:CurrencyExchangerService,
     private mostCuurenciesService:MostCuurenciesService,
@@ -72,8 +77,9 @@ export class CurrencyExchangerComponent implements OnInit , OnDestroy , OnChange
     const convertObj = new convertData();
     convertObj.setConvertData(result);
     const Sub1ref =  this.currencyExchangerService.convert(convertObj).pipe(first())
-    .subscribe((data:any)=>{
-      alert(data.error.info);      
+    .subscribe((data:convertResponse)=>{
+      this.toText = data.result + ' ' + data.query.to;
+      this.fromText = data.query.amount + ' ' + data.query.from + ' = ' + this.toText;
     let arr:any = this.mostCuurenciesService.mostCurrencies 
      arr.push(convertObj)
      this.mostCuurenciesService.mostCurrencies = arr;

@@ -1,5 +1,5 @@
-<form [formGroup]="form" class="form">
-    <div class="row">
+<div  class="form">
+    <form class="row" [formGroup]="form">
         <div class="col-md-5 col-12 mb-3">
             <div class="mb-1">Amount</div>
             <input 
@@ -36,24 +36,26 @@
                 </div>
             </div>
          </div>
-    </div>
+    </form>
     <div class="row mt-4 align-items-center">
         <div class="col-md-5 col-12">
             <input 
-              type="number" 
+              type="text" 
               class="form-control"
               class="text-center w-100"
               [placeholder]="'1 EUR =  XX XXX USD'"
               [disabled]="true"
+              [(ngModel)]="fromText"
           >
         </div>
         <div class="col">
             <input 
-            type="number" 
+            type="text" 
             class="form-control"
             class="text-center w-100"
             [placeholder]="'XX XXX USD'"
             [disabled]="true"
+            [(ngModel)]="toText"
             style="height: 60px;"
         >
         </div>
@@ -61,4 +63,4 @@
             <button routerLink="/details" [queryParams]="{from: f.from.value, to: f.to.value}"  [disabled]="form.invalid" type="button" class="btn btn-primary btn-sm w-100">More Details</button>
         </div>
     </div>
-  </form>
+  </div>

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://data.fixer.io/api/',
+  //apiUrl: 'https://api.apilayer.com/fixer/',
+  apiUrl : 'https://api.apilayer.com/fixer/'
 };
 
 /*

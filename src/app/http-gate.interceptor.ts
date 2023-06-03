@@ -18,7 +18,8 @@ export class HttpGateInterceptor implements HttpInterceptor {
      const isApiUrl = request.url.startsWith(environment.apiUrl);
      if (isApiUrl) {            
          request = request.clone({
-             params:request.params.set('access_key','dd1124950e1989acd2b6274bad9c02f9')
+             headers:request.headers.set('Content-Type', 'application/json')
+             .set('apikey', 'LqIIfoZqRyNvgODWORDnzDp3jGJChGPK')
          });
      }
      return next.handle(request);
